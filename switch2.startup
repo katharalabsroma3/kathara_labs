@@ -1,0 +1,11 @@
+ifconfig eth0 192.168.100.4/24 up
+ifconfig eth1 192.168.101.4/24 up
+ifconfig eth2 192.168.0.2/24 up
+
+service openvswitch-switch start
+
+ovs-vsctl add-br br2
+
+ovs-vsctl add-port br2 eth0 tag=10
+ovs-vsctl add-port br2 eth1 tag=20
+ovs-vsctl add-port br2 eth2 trunks=10,20
